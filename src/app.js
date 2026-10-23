@@ -24,6 +24,7 @@ const els = {
   entryText: document.getElementById("entryText"),
   cancelBtn: document.getElementById("cancelBtn"),
   saveBtn: document.getElementById("saveBtn"),
+  addBtnInline: document.getElementById("addBtnInline"),
 };
 
 const MEAL_LABELS = {
@@ -147,6 +148,7 @@ els.nextMonth.addEventListener("click", () => {
 els.addBtn.addEventListener("click", () => openModal());
 els.cancelBtn.addEventListener("click", closeModal);
 els.saveBtn.addEventListener("click", saveEntry);
+els.addBtnInline.addEventListener("click", () => openModal());
 
 // Клик по «Редактировать/Удалить» в списке
 els.entriesList.addEventListener("click", (ev) => {
@@ -172,6 +174,9 @@ els.modal.addEventListener("click", (ev) => {
 });
 
 // ---------- Старт ----------
+const today = new Date();
+state.viewDate = today;
+state.selectedDate = toIso(today);
 renderCalendarView();
 renderDay();
 

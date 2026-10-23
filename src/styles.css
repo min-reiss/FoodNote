@@ -225,3 +225,25 @@ body {
 .btn-primary { background: var(--accent); color: #fff; }
 .btn-primary:active { background: var(--accent-dark); }
 .btn-secondary { background: var(--border); color: var(--text); }
+.day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.day-header h2 {
+  margin: 0;
+}
+.btn-add-inline {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+.btn-add-inline:active { background: var(--accent-dark); }
