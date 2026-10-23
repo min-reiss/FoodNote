@@ -1,0 +1,227 @@
+/* Базовые переменные — легко менять тему */
+:root {
+  --bg: #fdfaf5;
+  --card: #ffffff;
+  --text: #2d2a26;
+  --muted: #8a837a;
+  --accent: #f4b860;
+  --accent-dark: #d99a2c;
+  --border: #ece6dc;
+  --danger: #d95959;
+  --radius: 14px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding-bottom: 40px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Topbar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+.topbar h1 { font-size: 1.15rem; margin: 0; font-weight: 600; }
+
+.btn-add {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+.btn-add:active { background: var(--accent-dark); }
+
+/* Календарь */
+.calendar-card {
+  background: var(--card);
+  margin: 0 16px 20px;
+  padding: 16px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.calendar-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.calendar-head button {
+  background: none; border: none; font-size: 1.4rem;
+  color: var(--muted); cursor: pointer; padding: 4px 10px;
+}
+.calendar-weekdays,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+.calendar-weekdays {
+  color: var(--muted);
+  font-size: 0.75rem;
+  text-align: center;
+  margin-bottom: 6px;
+}
+.cal-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+}
+.cal-day.empty { visibility: hidden; }
+.cal-day.selected { background: var(--accent); color: #fff; font-weight: 600; }
+.cal-day.today:not(.selected) { border: 1.5px solid var(--accent); }
+/* маркер, если в этот день есть записи */
+.cal-day.has-entries::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--accent-dark);
+}
+.cal-day.selected.has-entries::after { background: #fff; }
+
+/* Панель дня */
+.day-panel { padding: 0 16px; }
+.day-panel h2 {
+  font-size: 1.05rem;
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* Список приёмов пищи */
+.entries-list { display: flex; flex-direction: column; gap: 10px; }
+
+.meal-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.meal-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-dark);
+}
+.meal-text {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.meal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+  font-size: 0.8rem;
+}
+.meal-actions button {
+  background: none; border: none; padding: 0;
+  color: var(--muted); cursor: pointer;
+  text-decoration: underline;
+}
+.meal-actions .delete { color: var(--danger); }
+
+.empty-hint {
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Модалка */
+.modal {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 100;
+}
+.modal.hidden { display: none; }
+
+.modal-content {
+  background: var(--card);
+  width: 100%;
+  max-width: 520px;
+  padding: 20px;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.2s ease-out;
+}
+@keyframes slideUp { from { transform: translateY(30px); opacity: 0; } }
+
+.modal-content h3 { margin: 0; font-size: 1.1rem; }
+.modal-content label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+  font: inherit;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text);
+  outline: none;
+}
+.modal-content input:focus,
+.modal-content select:focus,
+.modal-content textarea:focus { border-color: var(--accent); }
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+.btn-primary, .btn-secondary {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:active { background: var(--accent-dark); }
+.btn-secondary { background: var(--border); color: var(--text); }

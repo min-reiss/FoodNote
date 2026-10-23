@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#f4b860" />
+  <title>Дневник питания</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Дневник питания</h1>
+    <button id="addBtn" class="btn-add" aria-label="Добавить запись">+</button>
+  </header>
+
+  <main>
+    <!-- КАЛЕНДАРЬ -->
+    <section class="calendar-card">
+      <div class="calendar-head">
+        <button id="prevMonth" aria-label="Предыдущий месяц">‹</button>
+        <span id="monthLabel"></span>
+        <button id="nextMonth" aria-label="Следующий месяц">›</button>
+      </div>
+      <div class="calendar-weekdays">
+        <span>Пн</span><span>Вт</span><span>Ср</span>
+        <span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+      </div>
+      <div id="calendarGrid" class="calendar-grid"></div>
+    </section>
+
+    <!-- ЗАПИСИ ВЫБРАННОГО ДНЯ -->
+    <section class="day-panel">
+      <h2 id="dayTitle">Выберите день</h2>
+      <div id="entriesList" class="entries-list"></div>
+    </section>
+  </main>
+
+  <!-- МОДАЛКА ДОБАВЛЕНИЯ/РЕДАКТИРОВАНИЯ -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <h3 id="modalTitle">Новая запись</h3>
+
+      <label>
+        Дата
+        <input type="date" id="entryDate" />
+      </label>
+
+      <label>
+        Приём пищи
+        <select id="entryMeal">
+          <option value="breakfast">Завтрак</option>
+          <option value="snack">Перекус</option>
+          <option value="lunch">Обед</option>
+          <option value="dinner">Ужин</option>
+        </select>
+      </label>
+
+      <label>
+        Описание
+        <textarea id="entryText" rows="4" placeholder="Что было съедено..."></textarea>
+      </label>
+
+      <div class="modal-actions">
+        <button id="cancelBtn" class="btn-secondary">Отмена</button>
+        <button id="saveBtn" class="btn-primary">Сохранить</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
